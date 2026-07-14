@@ -1,6 +1,7 @@
 from flask import Flask
 from .database import db
-
+from .routes import bp
+from flasgger import Swagger
 
 def create_app():
     app = Flask(__name__)
@@ -10,7 +11,8 @@ def create_app():
 
     db.init_app(app)
 
-    from .routes import bp
+    Swagger(app)
+
     app.register_blueprint(bp)
 
     with app.app_context():
